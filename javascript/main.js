@@ -1,3 +1,4 @@
+let con_status = "not-connected";
 let numPage = 1;
 let plan = $("#plan").val();
 let area = $("#area").val();
@@ -25,17 +26,44 @@ function initialPage() {
 }
 
 function getPage(url, numPage) {
+	checkConnection();
+
+	console.log(con_status);
+
+	if (con_status == "connected") {
+		$.ajax({
+			url: baseUrl + url,
+			type: "POST",
+			dataType: "json",
+			data: { numPage: numPage, plan: plan, area: area, line: line },
+			success: function (res) {
+				$("#content").html(res["view"]);
+			},
+			error: function (xhr, status, error) {
+				// Handle any errors during the AJAX request
+				console.log("An error occurred: " + error);
+			},
+		});
+	} else {
+		console.log("You are offline! Please check your internet connection.");
+	}
+}
+
+function checkConnection() {
 	$.ajax({
-		url: baseUrl + url,
+		url: baseUrl + "connection/check_internet_connection",
 		type: "POST",
 		dataType: "json",
-		data: { numPage: numPage, plan: plan, area: area, line: line },
+		data: {},
 		success: function (res) {
-			$("#content").html(res["view"]);
+			if (res["status"] == true) {
+				con_status = "connected";
+			}
 		},
 		error: function (xhr, status, error) {
 			// Handle any errors during the AJAX request
 			console.log("An error occurred: " + error);
+			return "not-connected";
 		},
 	});
 }
