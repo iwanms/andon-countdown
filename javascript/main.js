@@ -4,6 +4,9 @@ let plan = $("#plan").val();
 let area = $("#area").val();
 let line = $("#line").val();
 
+let titlePage = "";
+let contentPage = "";
+
 initialPage();
 setInterval(initialPage, 3000);
 startCountdown();
@@ -28,9 +31,8 @@ function initialPage() {
 function getPage(url, numPage) {
 	checkConnection();
 
-	console.log(con_status);
-
 	if (con_status == "connected") {
+		console.log("You are connected.");
 		$.ajax({
 			url: baseUrl + url,
 			type: "POST",
@@ -38,6 +40,9 @@ function getPage(url, numPage) {
 			data: { numPage: numPage, plan: plan, area: area, line: line },
 			success: function (res) {
 				$("#content").html(res["view"]);
+				titlePage = res["title"];
+				contentPage = res["view"];
+				saveLocalStorage(titlePage, contentPage);
 			},
 			error: function (xhr, status, error) {
 				// Handle any errors during the AJAX request
@@ -46,6 +51,15 @@ function getPage(url, numPage) {
 		});
 	} else {
 		console.log("You are offline! Please check your internet connection.");
+		if (numPage == 1) {
+			titlePage = "assy prod";
+		}
+		if (numPage == 2) {
+			titlePage = "assy now";
+		}
+
+		console.log("off title : " + titlePage);
+		getLocalStorage(titlePage);
 	}
 }
 
@@ -58,6 +72,8 @@ function checkConnection() {
 		success: function (res) {
 			if (res["status"] == true) {
 				con_status = "connected";
+			} else {
+				con_status = "not-connected";
 			}
 		},
 		error: function (xhr, status, error) {
@@ -66,6 +82,16 @@ function checkConnection() {
 			return "not-connected";
 		},
 	});
+}
+
+function saveLocalStorage(titlePage, contentPage) {
+	localStorage.setItem(titlePage, contentPage);
+	console.log("save local : " + titlePage);
+}
+
+function getLocalStorage(titlePage) {
+	let content = localStorage.getItem(titlePage);
+	console.log("local storage " + titlePage + ": " + content);
 }
 
 // call trigger

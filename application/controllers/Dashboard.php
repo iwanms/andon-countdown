@@ -35,11 +35,11 @@ class Dashboard extends CI_Controller {
 		$view = "";
 
 		if($numPage == 1){
-			$title = "assy satu";
+			$title = "assy prod";
 			$view = $this->load->view("assy/assy_satu",$data,TRUE);
 		}
 		if($numPage == 2){
-			$title = "assy dua";
+			$title = "assy now";
 			$data["absensi"] = $this->m_prod->getAbsensi($plan, $area, $line);
 			$view = $this->load->view("assy/assy_dua",$data,TRUE);
 		}
