@@ -1,4 +1,4 @@
-<h1>ASSY EMPAT</h1>
+<h1>DATA EMPAT</h1>
 <table class="table">
     <thead>
         <tr>

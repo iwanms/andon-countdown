@@ -52,10 +52,19 @@ function getPage(url, numPage) {
 	} else {
 		console.log("You are offline! Please check your internet connection.");
 		if (numPage == 1) {
-			titlePage = "assy prod";
+			titlePage = "data satu";
 		}
 		if (numPage == 2) {
-			titlePage = "assy now";
+			titlePage = "data dua";
+		}
+		if (numPage == 3) {
+			titlePage = "data tiga";
+		}
+		if (numPage == 4) {
+			titlePage = "data empat";
+		}
+		if (numPage == 5) {
+			titlePage = "data lima";
 		}
 
 		console.log("off title : " + titlePage);

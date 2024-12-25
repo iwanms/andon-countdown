@@ -35,24 +35,24 @@ class Dashboard extends CI_Controller {
 		$view = "";
 
 		if($numPage == 1){
-			$title = "assy prod";
+			$title = "data satu";
 			$view = $this->load->view("assy/assy_satu",$data,TRUE);
 		}
 		if($numPage == 2){
-			$title = "assy now";
+			$title = "data dua";
 			$data["absensi"] = $this->m_prod->getAbsensi($plan, $area, $line);
 			$view = $this->load->view("assy/assy_dua",$data,TRUE);
 		}
 		if($numPage == 3){
-			$title = "assy tiga";
+			$title = "data tiga";
 			$view = $this->load->view("assy/assy_tiga",$data,TRUE);
 		}
 		if($numPage == 4){
-			$title = "assy empat";
+			$title = "data empat";
 			$view = $this->load->view("assy/assy_empat",$data,TRUE);
 		}
 		if($numPage == 5){
-			$title = "assy lima";
+			$title = "data lima";
 			$view = $this->load->view("assy/assy_lima",$data,TRUE);
 		}
 		

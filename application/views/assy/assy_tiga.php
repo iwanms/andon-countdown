@@ -1,4 +1,4 @@
-<h1>ASSY TIGA</h1>
+<h1>DATA TIGA</h1>
 <table class="table">
     <thead>
         <tr>
