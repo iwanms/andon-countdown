@@ -95,12 +95,11 @@ function checkConnection() {
 
 function saveLocalStorage(titlePage, contentPage) {
 	localStorage.setItem(titlePage, contentPage);
-	console.log("save local : " + titlePage);
 }
 
 function getLocalStorage(titlePage) {
 	let content = localStorage.getItem(titlePage);
-	console.log("local storage " + titlePage + ": " + content);
+	return content;
 }
 
 // call trigger
